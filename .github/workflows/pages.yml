@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
@@ -30,9 +30,13 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         with:
           path: site
+      - name: Report missing Pages configuration
+        if: ${{ !github.event.repository.has_pages }}
+        run: echo "::warning::GitHub Pages is disabled. A repository administrator must choose GitHub Actions in Settings → Pages to publish this artifact."
 
   deploy:
     needs: test
+    if: ${{ github.event.repository.has_pages }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:

@@ -31,7 +31,7 @@ npm run smoke
 
 On Linux, add `--with-deps` to the Playwright install command if system dependencies are missing. Alternatively set `CHROMIUM_PATH` to an existing compatible Chromium/Chrome binary. The smoke check serves the project under a Pages-style path, checks asset loading and WebGL rendering, exercises held touch input, and plays through the three sectors, a timeout, and a restart. An optional `SHOTS_DIR` saves screenshots.
 
-For GitHub Pages: in the existing repository, open **Settings → Pages** and choose **GitHub Actions** as the source. A push to `main` triggers [Test and deploy Pages](.github/workflows/pages.yml). The workflow runs unit and browser tests before packaging and deploying the static site. You can also manually run it from **Actions** after enabling Pages. The root `index.html` and its relative local assets need no build step or CDN. The vendored Three.js license is in [vendor/THREE-LICENSE](vendor/THREE-LICENSE).
+For GitHub Pages: a repository administrator must open **Settings → Pages** and choose **GitHub Actions** as the source. A push to `main` triggers [Test and deploy Pages](.github/workflows/pages.yml). The workflow runs unit and browser tests before packaging the static site, then deploys if Pages is enabled. If the run reports that Pages is disabled, enable it and manually run the workflow from **Actions**. The root `index.html` and its relative local assets need no build step or CDN. The vendored Three.js license is in [vendor/THREE-LICENSE](vendor/THREE-LICENSE).
 
 ## VIVERSE Spark 2026 — Games / solo
 

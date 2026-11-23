@@ -1,0 +1,84 @@
+* { box-sizing: border-box; }
+:root { color-scheme: dark; font-family: system-ui, sans-serif; --ink: #f5f5ff; --dim: #b2bbd2; --mint: #78f9d5; --line: #ccd5ff30; }
+body { margin: 0; background: #0a0d1d; color: var(--ink); }
+[hidden] { display: none !important; }
+.flight { position: relative; min-height: 100vh; min-height: 100svh; isolation: isolate; display: grid; align-items: center; padding: 80px clamp(18px, 5vw, 82px); background: radial-gradient(ellipse at 76% 50%, #473975 0%, #252246 32%, #101328 69%, #080b19 100%); }
+#world, .shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+#world { z-index: -2; display: block; }
+.shade { z-index: -1; pointer-events: none; background: linear-gradient(180deg, #090c1cc9 0%, transparent 25%, transparent 68%, #090c1cdf 100%); }
+.flight:not([data-mode="playing"]) .shade { background: linear-gradient(95deg, #070a19f2 0%, #0a0d20d9 25%, #0b102238 62%, #0b102219 100%), linear-gradient(0deg, #0a0c1bc9 0%, transparent 25%); }
+.top, .bottom { position: absolute; left: clamp(16px, 4vw, 60px); right: clamp(16px, 4vw, 60px); display: flex; align-items: center; justify-content: space-between; }
+.top { top: 20px; z-index: 1; }
+.bottom { bottom: 22px; pointer-events: none; }
+.brand, .actions, .panel-actions, .eyebrow, .route, .combo { display: flex; align-items: center; }
+.brand { gap: 9px; font-size: .72rem; font-weight: 820; letter-spacing: .19em; white-space: nowrap; }
+.actions, .panel-actions { gap: 8px; flex-wrap: wrap; }
+button { color: var(--ink); font: inherit; font-size: .8rem; font-weight: 750; background: #121930ed; border: 1px solid var(--line); border-radius: 8px; min-height: 42px; padding: 8px 13px; cursor: pointer; }
+button:hover:not(:disabled) { border-color: var(--mint); }
+button:disabled { opacity: .52; cursor: default; }
+button:focus-visible, h1:focus-visible { outline: 2px solid #ffd7a4; outline-offset: 4px; }
+.panel { width: min(100%, 530px); position: relative; }
+.eyebrow, .micro, .metric span, .best, .route, .combo span { font-size: .68rem; font-weight: 800; letter-spacing: .16em; }
+.eyebrow { gap: 10px; color: var(--mint); }
+.dot { width: 7px; height: 7px; background: var(--mint); transform: rotate(45deg); box-shadow: 0 0 16px #78f9d5b0; }
+h1 { font-size: clamp(3rem, 8.3vw, 8.4rem); line-height: .84; letter-spacing: -.085em; margin: 17px 0 24px; font-weight: 880; }
+h1 em { display: block; color: var(--mint); font-style: normal; text-shadow: 0 0 65px #5dffce50; }
+.flight:not([data-mode="ready"]) h1 { font-size: clamp(3rem, 6vw, 6rem); line-height: .94; }
+.pitch { color: #dbe0f0; max-width: 42ch; line-height: 1.55; font-size: clamp(.94rem, 1.7vw, 1.13rem); margin: 0 0 18px; }
+#how { max-width: 410px; padding: 12px 14px; margin-bottom: 18px; border: 1px solid var(--line); border-radius: 10px; background: #12182ad9; }
+.rules { display: grid; grid-template-columns: 49px 1fr; gap: 6px; color: #e5e8f4; font-size: .78rem; line-height: 1.35; margin: 0 0 7px; }
+.rules b { color: var(--mint); font-size: .67rem; letter-spacing: .1em; align-self: center; }
+.rules:nth-child(2) b { color: #ffb4a2; }
+.keys { display: flex; flex-wrap: wrap; gap: 6px 10px; border-top: 1px solid var(--line); padding-top: 8px; color: #d5daea; font-size: .7rem; }
+kbd { display: inline-grid; place-items: center; min-width: 17px; line-height: 18px; border-radius: 3px; border: 1px solid var(--line); color: white; font: inherit; }
+.primary { background: var(--mint); color: #081c1a; border-color: transparent; padding: 11px 16px; min-width: 145px; font-size: .9rem; text-align: left; }
+.primary span { float: right; margin-left: 12px; }
+.primary:hover:not(:disabled) { background: #adffe8; border-color: transparent; }
+.best { color: var(--dim); margin: 13px 0 0; }
+.best strong { color: var(--ink); margin-left: 5px; }
+.route, .combo { gap: 10px; color: var(--dim); text-transform: uppercase; }
+.route b, .combo b { color: var(--ink); }
+.route div { display: flex; gap: 3px; }
+.route i { width: 16px; height: 3px; background: #d5dbed4f; border-radius: 3px; }
+.route i.active { background: var(--mint); }
+.telemetry { position: absolute; top: 78px; left: 50%; transform: translateX(-50%); width: min(calc(100% - 32px), 580px); background: #0b1025e8; border: 1px solid var(--line); border-radius: 11px; padding: 11px 15px 9px; }
+.sector { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+.micro { color: var(--mint); }
+.sector strong { font-size: .88rem; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin: 7px 0 9px; }
+.metric { display: flex; flex-direction: column; gap: 2px; border-left: 1px solid var(--line); padding-left: 9px; }
+.metric span { color: var(--dim); }
+.metric strong { font-size: 1.16rem; font-variant-numeric: tabular-nums; }
+#timer.urgent { color: #ffb4a2; }
+.progress, .combo-bar { height: 3px; border-radius: 3px; background: #aab6ed45; overflow: hidden; }
+.progress div, .combo-bar div { height: 100%; background: var(--mint); }
+.combo-bar { width: 52px; }
+.signal { position: absolute; left: 50%; transform: translateX(-50%); bottom: 70px; max-width: min(86%, 460px); width: max-content; color: #eafff8; background: #141e33ee; border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-size: .82rem; font-weight: 740; text-align: center; pointer-events: none; }
+.touch { display: none; position: absolute; bottom: max(21px, env(safe-area-inset-bottom)); left: 15px; right: 15px; justify-content: space-between; pointer-events: none; }
+.touch div { display: flex; gap: 8px; }
+.touch button { pointer-events: auto; touch-action: none; user-select: none; width: 52px; height: 52px; font-size: 1.35rem; background: #131d37df; }
+.touch button.active { background: var(--mint); color: #081c1a; }
+.noscript { padding: 16px; background: #181d32; }
+@media (pointer: coarse), (max-width: 700px) {
+  .touch { display: flex; }
+  .flight[data-mode="playing"] .bottom { bottom: 89px; }
+  .signal { bottom: 126px; }
+}
+@media (max-width: 600px) {
+  .flight { padding-block: 77px 63px; }
+  .top { top: 13px; }
+  .bottom { bottom: 14px; }
+  h1 { font-size: clamp(4rem, 16vw, 6rem); margin: 14px 0 18px; }
+  .telemetry { top: 66px; }
+  .route { font-size: .59rem; gap: 6px; }
+  .route i { width: 9px; }
+  .combo { gap: 5px; }
+  .combo-bar { width: 30px; }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  h1 { font-size: 3.7rem; }
+  h1 em { display: inline; }
+  .flight[data-mode="playing"] { min-height: 100svh; }
+  .telemetry { top: 12px; width: min(47vw, 430px); }
+  .signal { bottom: 53px; }
+}

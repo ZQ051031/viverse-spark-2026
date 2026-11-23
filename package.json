@@ -1,0 +1,15 @@
+{
+  "name": "spark-drift",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/logic.test.js",
+    "smoke": "node tests/smoke.js",
+    "serve": "node tests/server.js"
+  },
+  "devDependencies": {
+    "playwright-core": "1.58.2",
+    "three": "0.183.2"
+  }
+}
